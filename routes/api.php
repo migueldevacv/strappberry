@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/user', 'UserController@index');
-Route::post('/user', 'UserController@store');
-Route::get('/user/{id}', 'UserController@show');
-Route::put('/user/{id}', 'UserController@update');
-Route::delete('/user/{id}', 'UserController@destroy');
+Route::resource('roles', 'Admin\RoleController');
+Route::resource('users', 'Admin\UserController');
+Route::resource('register', 'Admin\UserController@register');

@@ -3,44 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\RoleRequest;
+use App\Models\Admin\Role;
+use App\Providers\MessagesResponse;
 use Illuminate\Http\Response;
 
 class RoleController extends Controller
 {
-    public function login()
-    {
-        return response()->json([], Response::HTTP_OK);
-    }
-
-    public function register()
-    {
-
-        return response()->json([], Response::HTTP_OK);
-    }
-
     public function index()
     {
-        return response()->json([], Response::HTTP_OK);
+        $role = Role::all();
+        return response()->json($role, Response::HTTP_OK);
     }
 
-    public function show()
+    public function show(RoleRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $role = Role::find($id);
+        return response()->json($role, Response::HTTP_OK);
     }
 
-    public function store()
+    public function store(RoleRequest $req)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $role = Role::create($req->toArray());
+        return MessagesResponse::createdOk('role', $role);
     }
 
-    public function update()
+    public function update(RoleRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $role = Role::find($id);
+        $role->update($req->toArray());
+        return MessagesResponse::updatedOk('role', $role);
     }
-
-    public function destroy()
+    
+    public function destroy(RoleRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $role = Role::find($id);
+        $role->update(['status' => !$role->status]);
+        return MessagesResponse::disabledOk('role', $role);
     }
 }
