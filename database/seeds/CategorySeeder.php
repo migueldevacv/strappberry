@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Catalogs\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -9,8 +10,13 @@ class CategorySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
-        //
+        Category::insert([
+            [
+                "description" => 'WITHOUT CATEGORY',
+                'created_at' => now(),
+            ],
+        ]);
     }
 }

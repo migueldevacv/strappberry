@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserRequest;
 use App\Models\Admin\User;
+use App\Providers\MessagesResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -25,26 +27,33 @@ class UserController extends Controller
 
     public function index()
     {
-        return response()->json([], Response::HTTP_OK);
+        $user = User::all();
+        return MessagesResponse::indexOk($user);
     }
 
-    public function show()
+    public function show(UserRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $user = User::find($id);
+        return MessagesResponse::showOk($user);
     }
 
-    public function store()
+    public function store(UserRequest $req)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $user = User::create($req->validated());
+        return MessagesResponse::createdOk('user', $user);
     }
 
-    public function update()
+    public function update(UserRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $user = User::find($id);
+        $user->update($req->validated());
+        return MessagesResponse::updatedOk('user', $user);
     }
 
-    public function destroy()
+    public function destroy(UserRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $user = User::find($id);
+        $user->update(['status' => !$user->status]);
+        return MessagesResponse::disabledOk('user', $user);
     }
 }

@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Catalogs;
 
 use App\Http\Requests\NaturalCrudRequest;
+use App\Models\Catalogs\Category;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Admin\Role;
 
-class RoleRequest extends NaturalCrudRequest
+class CategoryRequest extends NaturalCrudRequest
 {
-    protected $_model = 'role';
-    protected $_table = 'roles';
-    protected $_modelClass = Role::class;
+
+    protected $_model = 'category';
+    protected $_table = 'categories';
+    protected $_modelClass = Category::class;
 
     public function mapResponses()
     {

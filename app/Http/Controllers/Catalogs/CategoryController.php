@@ -3,33 +3,42 @@
 namespace App\Http\Controllers\Catalogs;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Catalogs\CategoryRequest;
+use App\Models\Catalogs\Category;
+use App\Providers\MessagesResponse;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return response()->json([], Response::HTTP_OK);
+        $category = Category::all();
+        return MessagesResponse::indexOk($category);
     }
 
-    public function show()
+    public function show(CategoryRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $category = Category::find($id);
+        return MessagesResponse::showOk($category);
     }
 
-    public function store()
+    public function store(CategoryRequest $req)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $category = Category::create($req->validated());
+        return MessagesResponse::createdOk('category', $category);
     }
 
-    public function update()
+    public function update(CategoryRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $category = Category::find($id);
+        $category->update($req->validated());
+        return MessagesResponse::updatedOk('category', $category);
     }
 
-    public function destroy()
+    public function destroy(CategoryRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $category = Category::find($id);
+        $category->update(['status' => !$category->status]);
+        return MessagesResponse::disabledOk('category', $category);
     }
 }

@@ -20,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('roles', 'Admin\RoleController');
 Route::resource('users', 'Admin\UserController');
+Route::resource('menus', 'Admin\MenuController');
+Route::resource('categories', 'Catalogs\CategoryController');
+Route::resource('products', 'Catalogs\ProductController');
 Route::resource('register', 'Admin\UserController@register');

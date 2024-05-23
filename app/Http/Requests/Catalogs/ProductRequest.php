@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Catalogs;
 
 use App\Http\Requests\NaturalCrudRequest;
+use App\Models\Catalogs\Product;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Admin\Role;
 
-class RoleRequest extends NaturalCrudRequest
+class ProductRequest extends NaturalCrudRequest
 {
-    protected $_model = 'role';
-    protected $_table = 'roles';
-    protected $_modelClass = Role::class;
+
+    protected $_model = 'product';
+    protected $_table = 'products';
+    protected $_modelClass = Product::class;
 
     public function mapResponses()
     {
@@ -26,20 +27,20 @@ class RoleRequest extends NaturalCrudRequest
     public function rulesPost()
     {
         return [
-            'description' => 'required|string|max:20|min:3|unique:' . $this->_table
+            'name' => 'required|string|max:50|min:5',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 
     public function rulesPut($id)
     {
         return [
-            'description' => [
-                'required',
-                'string',
-                'max:20',
-                'min:3',
-                Rule::unique($this->_table, 'description')->ignore($id, 'id'),
-            ]
+            'name' => 'required|string|max:50|min:5',
+            'description' => 'required|string',
+            'image' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

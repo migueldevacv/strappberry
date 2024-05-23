@@ -17,7 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id', 'status'
+    ];
+
+    protected $attributes = [
+        'role_id' => Role::GUEST
     ];
 
     /**

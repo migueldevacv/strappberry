@@ -9,7 +9,7 @@ class MenuSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         //
     }

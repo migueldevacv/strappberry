@@ -13,28 +13,28 @@ class RoleController extends Controller
     public function index()
     {
         $role = Role::all();
-        return response()->json($role, Response::HTTP_OK);
+        return MessagesResponse::indexOk($role);
     }
 
     public function show(RoleRequest $req, $id)
     {
         $role = Role::find($id);
-        return response()->json($role, Response::HTTP_OK);
+        return MessagesResponse::showOk($role);
     }
 
     public function store(RoleRequest $req)
     {
-        $role = Role::create($req->toArray());
+        $role = Role::create($req->validated());
         return MessagesResponse::createdOk('role', $role);
     }
 
     public function update(RoleRequest $req, $id)
     {
         $role = Role::find($id);
-        $role->update($req->toArray());
+        $role->update($req->validated());
         return MessagesResponse::updatedOk('role', $role);
     }
-    
+
     public function destroy(RoleRequest $req, $id)
     {
         $role = Role::find($id);

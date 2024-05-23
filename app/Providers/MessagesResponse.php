@@ -4,6 +4,23 @@ namespace App\Providers;
 
 class MessagesResponse
 {
+
+    public static function indexOk($data = [])
+    {
+        return response()->json([
+            'data' => $data,
+            'status' => true
+        ]);
+    }
+
+    public static function showOk($data = [])
+    {
+        return response()->json([
+            'data' => $data,
+            'status' => true
+        ]);
+    }
+
     /**
      * Register any application services.
      *

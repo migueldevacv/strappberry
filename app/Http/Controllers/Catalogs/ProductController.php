@@ -2,34 +2,43 @@
 
 namespace App\Http\Controllers\Catalogs;
 
+use App\Http\Requests\Catalogs\ProductRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Providers\MessagesResponse;
+use App\Models\Catalogs\Product;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json([], Response::HTTP_OK);
+        $product = Product::all();
+        return MessagesResponse::indexOk($product);
     }
 
-    public function show()
+    public function show(ProductRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $product = Product::find($id);
+        return MessagesResponse::showOk($product);
     }
 
-    public function store()
+    public function store(ProductRequest $req)
     {
-        return response()->json([], Response::HTTP_CREATED);
+        $product = Product::create($req->validated());
+        return MessagesResponse::createdOk('product', $product);
     }
 
-    public function update()
+    public function update(ProductRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $product = Product::find($id);
+        $product->update($req->validated());
+        return MessagesResponse::updatedOk('product', $product);
     }
 
-    public function destroy()
+    public function destroy(ProductRequest $req, $id)
     {
-        return response()->json([], Response::HTTP_OK);
+        $product = Product::find($id);
+        $product->update(['status' => !$product->status]);
+        return MessagesResponse::disabledOk('product', $product);
     }
 }

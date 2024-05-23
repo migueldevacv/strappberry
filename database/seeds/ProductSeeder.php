@@ -9,7 +9,7 @@ class ProductSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         //
     }
