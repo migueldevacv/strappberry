@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('icon');
             $table->foreignId('menu_id')->nullable()->constrained();
             $table->boolean('status')->default(true);
+            $table->foreignId('role_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

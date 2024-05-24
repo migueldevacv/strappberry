@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         RoleSeeder::run();
         CategorySeeder::run();
+        MenuSeeder::run();
+        ProductSeeder::run();
         // $this->call(UsersTableSeeder::class);
     }
 }

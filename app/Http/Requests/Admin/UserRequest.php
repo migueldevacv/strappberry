@@ -3,9 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\NaturalCrudRequest;
+use App\Models\Admin\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\Admin\User;
 
 class UserRequest extends NaturalCrudRequest
 {
@@ -31,7 +31,7 @@ class UserRequest extends NaturalCrudRequest
             'email' => 'required|string|max:100|min:8|unique:' . $this->_table,
             'password' => 'required|string|max:20|min:7',
             'name' => 'required|string|max:50|min:4',
-            'role_id' => 'required|exists:roles,id',
+            'role_id' => 'exists:roles,id',
         ];
     }
 

@@ -5,6 +5,24 @@ namespace App\Providers;
 class MessagesResponse
 {
 
+    public static function authOk($data = [])
+    {
+        return response()->json([
+            'message' => "Login successful",
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+    public static function authFail()
+    {
+        return response()->json([
+            'message' => "The credentials does not match",
+            'errors' => ["The credentials does not match"],
+            'status' => false
+        ]);
+    }
+
     public static function indexOk($data = [])
     {
         return response()->json([

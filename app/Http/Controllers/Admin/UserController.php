@@ -3,26 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\Admin\User;
 use App\Providers\MessagesResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
-    public function login()
+    public function login(LoginRequest $req)
     {
-        return response()->json([], Response::HTTP_OK);
+        $user = $req->authenticate();
+        $token = JWTAuth::fromUser($user);
+        $resBody = ['user' => $user, 'token' => $token];
+        return MessagesResponse::authOk($resBody);
     }
 
-    public function register(Request $req)
+    public function register(UserRequest $req)
     {
-        // $validator = Validator::make($req->all(), )
-        // $user = User::create();
-
-        return response()->json([], Response::HTTP_OK);
+        $data = collect($req->validated())->except('role_id');
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data->toArray());
+        $user = JWTAuth::fromUser($user);
+        return MessagesResponse::authOk($user);
     }
 
     public function index()
@@ -39,14 +46,18 @@ class UserController extends Controller
 
     public function store(UserRequest $req)
     {
-        $user = User::create($req->validated());
+        $data = $req->validated();
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
         return MessagesResponse::createdOk('user', $user);
     }
 
     public function update(UserRequest $req, $id)
     {
+        $data = $req->validated();
+        $data['password'] = Hash::make($data['password']);
         $user = User::find($id);
-        $user->update($req->validated());
+        $user->update($data);
         return MessagesResponse::updatedOk('user', $user);
     }
 
