@@ -19,12 +19,17 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->header('Authorization');
-        $token = str_replace('Bearer ', '', $token);
-        $user = JWTAuth::parseToken()->authenticate();
-        if (!$user) throw new HttpResponseException(MessagesResponse::notLogged(), Response::HTTP_FORBIDDEN);
-
-        $request->merge(['user' => $user]);
-        return $next($request);
+        try {
+            //code...
+            $token = $request->header('Authorization');
+            $token = str_replace('Bearer ', '', $token);
+            $user = JWTAuth::parseToken()->authenticate();
+            if (!$user) throw new HttpResponseException(MessagesResponse::notLogged(), Response::HTTP_FORBIDDEN);
+    
+            $request->merge(['user' => $user]);
+            return $next($request);
+        } catch (\Throwable $th) {
+            throw new HttpResponseException(MessagesResponse::sessionExpired(), 999);
+        }
     }
 }

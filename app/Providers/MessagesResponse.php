@@ -14,6 +14,15 @@ class MessagesResponse
         ]);
     }
 
+    public static function sessionExpired()
+    {
+        return response()->json([
+            'message' => "You're session was expired",
+            'errors' => ["You're session was expired"],
+            'status' => false
+        ]);
+    }
+
     public static function notLogged()
     {
         return response()->json([
