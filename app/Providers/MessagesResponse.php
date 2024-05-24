@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Response;
+
 class MessagesResponse
 {
 
@@ -11,7 +13,7 @@ class MessagesResponse
             'message' => "Login successful",
             'status' => true,
             'data' => $data
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public static function sessionExpired()
@@ -20,7 +22,7 @@ class MessagesResponse
             'message' => "You're session was expired",
             'errors' => ["You're session was expired"],
             'status' => false
-        ]);
+        ], Response::HTTP_FORBIDDEN);
     }
 
     public static function notLogged()
@@ -29,7 +31,7 @@ class MessagesResponse
             'message' => "You are not logged",
             'errors' => ["You are not logged"],
             'status' => false
-        ]);
+        ], Response::HTTP_FORBIDDEN);
     }
 
     public static function authFail()
@@ -38,7 +40,7 @@ class MessagesResponse
             'message' => "The credentials does not match",
             'errors' => ["The credentials does not match"],
             'status' => false
-        ]);
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     public static function indexOk($data = [])
@@ -46,7 +48,7 @@ class MessagesResponse
         return response()->json([
             'data' => $data,
             'status' => true
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public static function showOk($data = [])
@@ -54,7 +56,7 @@ class MessagesResponse
         return response()->json([
             'data' => $data,
             'status' => true
-        ]);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -68,7 +70,7 @@ class MessagesResponse
             'data' => $data,
             'message' => "The $model was created successfully",
             'status' => true
-        ]);
+        ], Response::HTTP_CREATED);
     }
 
     public static function updatedOk($model = '', $data = [])
@@ -77,7 +79,7 @@ class MessagesResponse
             'data' => $data,
             'message' => "The $model was updated successfully",
             'status' => true
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public static function disabledOk($model = '', $data = [])
@@ -86,7 +88,7 @@ class MessagesResponse
             'data' => $data,
             'message' => "The status form $model was changed successfully",
             'status' => true
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public static function idNotProvided()
@@ -97,7 +99,7 @@ class MessagesResponse
             'errors' => [
                 'The id was not provided'
             ]
-        ]);
+        ], Response::HTTP_NOT_FOUND);
     }
 
     public static function idNotFound()
@@ -108,6 +110,6 @@ class MessagesResponse
             'errors' => [
                 'The id provided was not found'
             ]
-        ]);
+        ], Response::HTTP_NOT_FOUND);
     }
 }

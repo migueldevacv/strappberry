@@ -24,12 +24,12 @@ class JwtMiddleware
             $token = $request->header('Authorization');
             $token = str_replace('Bearer ', '', $token);
             $user = JWTAuth::parseToken()->authenticate();
-            if (!$user) throw new HttpResponseException(MessagesResponse::notLogged(), Response::HTTP_FORBIDDEN);
+            if (!$user) throw new HttpResponseException(MessagesResponse::notLogged());
     
             $request->merge(['user' => $user]);
             return $next($request);
         } catch (\Throwable $th) {
-            throw new HttpResponseException(MessagesResponse::sessionExpired(), 999);
+            throw new HttpResponseException(MessagesResponse::sessionExpired());
         }
     }
 }

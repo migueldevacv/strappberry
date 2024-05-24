@@ -28,8 +28,9 @@ class UserController extends Controller
         $data = collect($req->validated())->except('role_id');
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data->toArray());
-        $user = JWTAuth::fromUser($user);
-        return MessagesResponse::authOk($user);
+        $token = JWTAuth::fromUser($user);
+        $resBody = ['user' => $user, 'token' => $token];
+        return MessagesResponse::authOk($resBody);
     }
 
     public function index()
