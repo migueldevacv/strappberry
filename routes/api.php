@@ -21,8 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'Admin\UserController@login');
 Route::post('register', 'Admin\UserController@register');
 
-Route::resource('roles', 'Admin\RoleController');
-Route::resource('users', 'Admin\UserController');
-Route::resource('menus', 'Admin\MenuController');
-Route::resource('categories', 'Catalogs\CategoryController');
-Route::resource('products', 'Catalogs\ProductController');
+Route::middleware('jwt')->group(function () {
+    Route::resource('roles', 'Admin\RoleController');
+    Route::resource('users', 'Admin\UserController');
+    Route::resource('menus', 'Admin\MenuController');
+    Route::resource('categories', 'Catalogs\CategoryController');
+    Route::resource('products', 'Catalogs\ProductController');
+});

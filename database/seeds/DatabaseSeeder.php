@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         CategorySeeder::run();
         MenuSeeder::run();
         ProductSeeder::run();
+        UserSeeder::run();
         // $this->call(UsersTableSeeder::class);
     }
 }

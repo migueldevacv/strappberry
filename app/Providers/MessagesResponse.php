@@ -14,6 +14,15 @@ class MessagesResponse
         ]);
     }
 
+    public static function notLogged()
+    {
+        return response()->json([
+            'message' => "You are not logged",
+            'errors' => ["You are not logged"],
+            'status' => false
+        ]);
+    }
+
     public static function authFail()
     {
         return response()->json([
