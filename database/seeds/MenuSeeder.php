@@ -32,6 +32,7 @@ class MenuSeeder extends Seeder
                 'title' => 'Products',
                 'url' => '/page/products',
                 'icon' => 'conveyor_belt',
+                'role_id' => '3',
             ],
             [
                 'title' => 'Products',

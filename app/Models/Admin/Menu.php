@@ -11,10 +11,12 @@ class Menu extends Model
         'url',
         'icon',
         'menu_id',
+        'role_id',
         'status',
     ];
 
     protected $attributes = [  
         'menu_id' => null,
+        'role_id' => Role::ADMIN,
     ];
 }

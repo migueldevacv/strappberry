@@ -16,16 +16,38 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Laptop',
                 'description' => 'beautiful',
-                'image' => 'a',
                 'category_id' => '1',
                 'price' => '10000',
             ],
             [
                 'name' => 'Laptop 2',
                 'description' => 'beautiful',
-                'image' => 'a',
                 'category_id' => '1',
-                'price' => '10000',
+                'price' => '13223',
+            ],
+            [
+                'name' => 'Laptop 3',
+                'description' => 'beautiful',
+                'category_id' => '1',
+                'price' => '1412',
+            ],
+            [
+                'name' => 'Laptop 4',
+                'description' => 'beautiful',
+                'category_id' => '1',
+                'price' => '41123',
+            ],
+            [
+                'name' => 'Laptop 5',
+                'description' => 'beautiful',
+                'category_id' => '1',
+                'price' => '1412',
+            ],
+            [
+                'name' => 'Laptop 6',
+                'description' => 'beautiful',
+                'category_id' => '1',
+                'price' => '41123',
             ],
         ]);
     }
