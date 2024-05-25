@@ -30,6 +30,7 @@ class ProductRequest extends NaturalCrudRequest
             'name' => 'required|string|max:50|min:5',
             'description' => 'required|string',
             'image' => 'string',
+            'price' => 'required',
             'category_id' => 'required|exists:categories,id',
         ];
     }
@@ -40,6 +41,7 @@ class ProductRequest extends NaturalCrudRequest
             'name' => 'required|string|max:50|min:5',
             'description' => 'required|string',
             'image' => 'string',
+            'price' => 'required',
             'category_id' => 'required|exists:categories,id',
         ];
     }
