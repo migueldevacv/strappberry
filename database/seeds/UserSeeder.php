@@ -19,6 +19,18 @@ class UserSeeder extends Seeder
                 'email' => 'user@admin.com',
                 'password' => '$2y$10$zzBrqYZHXHKXXhPBpYvsJOv6pZPVi3TyleuNGU0.usr9zVAK1awFu',
                 'role_id' => '1',
+            ],
+            [
+                'name' => 'GUEST',
+                'email' => 'user@guest.com',
+                'password' => '$2y$10$zzBrqYZHXHKXXhPBpYvsJOv6pZPVi3TyleuNGU0.usr9zVAK1awFu',
+                'role_id' => '2',
+            ],
+            [
+                'name' => 'CUSTOMER',
+                'email' => 'user@customer.com',
+                'password' => '$2y$10$zzBrqYZHXHKXXhPBpYvsJOv6pZPVi3TyleuNGU0.usr9zVAK1awFu',
+                'role_id' => '3',
             ]
         ]);
     }
